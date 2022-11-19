@@ -1,5 +1,6 @@
 package com.IA.Promo171.WikiHoax.backend;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,6 +9,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +18,7 @@ public class Image {
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "proprietaire_fk")
+    @JoinColumn(name = "page_fk")
     @JsonIgnore
     private Page page;
     

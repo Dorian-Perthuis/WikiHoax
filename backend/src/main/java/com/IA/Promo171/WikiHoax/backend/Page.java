@@ -1,6 +1,7 @@
 package com.IA.Promo171.WikiHoax.backend;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -21,15 +22,14 @@ public class Page {
     private String titre;
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy="proprietaire", cascade = CascadeType.ALL)
-    @JoinColumn(name = "page_id")
-    private ArrayList<Image> img = new ArrayList();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy="page", cascade = CascadeType.ALL)
+    private List<Image> img = new ArrayList();
 
     public Page(long id) {
         this.id = id;
     }
 
-    public ArrayList<Image> getImages() {
+    public List<Image> getImages() {
         return img;
     }
 
