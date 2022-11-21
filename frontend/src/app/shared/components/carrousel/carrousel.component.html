@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="images-container">
+    <button #btnR class="button-red-1 left" (click)="moveLeft()">
+      <svg width="15" height="26" viewBox="0 0 15 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 22.2915L5.72874 13L15 3.7085L12.1457 0.854252L0 13L12.1457 25.1458L15 22.2915Z" fill="#EDF2F4"/>
+      </svg>
+    </button>
+    <div #images class="images" (scroll)="onScroll($event)">
+      <div class="test-image"></div>
+      <div class="test-image"></div>
+      <div class="test-image"></div>
+      <div class="test-image"></div>
+      <div class="test-image"></div>
+      <div class="test-image"></div>
+    </div>
+    <button #btnR class="button-red-1 right" (click)="moveRight()">
+      <svg width="15" height="26" viewBox="0 0 15 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 22.2915L5.72874 13L15 3.7085L12.1457 0.854252L0 13L12.1457 25.1458L15 22.2915Z" fill="#EDF2F4"/>
+      </svg>
+    </button>
+  </div>
+</div>

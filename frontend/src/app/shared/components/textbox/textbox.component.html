@@ -1,4 +1,4 @@
-<div class="container">
+<div #contentContainer class="container" [ngClass]="{'light':color=='light'}">
   <span class="title">{{title}}</span>
   <div class="line"></div>
   <div class="inputBox" contenteditable="true"></div>

@@ -4,16 +4,19 @@
     <div class="btn-container">
       <header-button icon="classement" title="Classement" (click)="activateClassement()"></header-button>
       <header-button icon="partie" title="Partie" (click)="activatePartie()"></header-button>
-      <user-button></user-button>
+      <user-button (click)="activateUser()"></user-button>
     </div>
   </header>
-  <div *ngIf="section=='partie'">
-    <p>partie</p>
-  </div>
-  <div *ngIf="section=='classement'">
+  <section *ngIf="section=='partie'">
+    <game-page></game-page>
+  </section>
+  <section *ngIf="section=='classement'">
     <p>classement</p>
-  </div>
-  <div *ngIf="section=='main'">
+  </section>
+  <section *ngIf="section=='main'">
     <p>main</p>
-  </div>
+  </section>
+  <section *ngIf="section=='user'">
+    <p>user</p>
+  </section>
 </div>
