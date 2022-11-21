@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderButtonComponent implements OnInit {
 
   @Input() title: string = "Need Title !";
-  @Input() url: string = "";
+  @Input() icon: string = "";
 
   constructor() { }
 

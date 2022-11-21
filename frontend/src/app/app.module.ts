@@ -7,6 +7,7 @@ import { LogoWikiHoaxComponent } from './shared/components/logo-wiki-hoax/logo-w
 import { TextboxComponent } from './shared/components/textbox/textbox.component';
 import { MainPageComponent } from './Modules/main-page/main-page.component';
 import { HeaderButtonComponent } from './Modules/main-page/header-button/header-button.component';
+import { UserButtonComponent } from './Modules/main-page/user-button/user-button.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HeaderButtonComponent } from './Modules/main-page/header-button/header-
     LogoWikiHoaxComponent,
     TextboxComponent,
     MainPageComponent,
-    HeaderButtonComponent
+    HeaderButtonComponent,
+    UserButtonComponent
   ],
   imports: [
     BrowserModule

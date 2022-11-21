@@ -1,6 +1,19 @@
 <div class="page">
   <header>
-    <logo-wiki-hoax></logo-wiki-hoax>
-    <header-button url="./images/icon_classement.svg"></header-button>
+    <logo-wiki-hoax (click)="activateMain()"></logo-wiki-hoax>
+    <div class="btn-container">
+      <header-button icon="classement" title="Classement" (click)="activateClassement()"></header-button>
+      <header-button icon="partie" title="Partie" (click)="activatePartie()"></header-button>
+      <user-button></user-button>
+    </div>
   </header>
+  <div *ngIf="section=='partie'">
+    <p>partie</p>
+  </div>
+  <div *ngIf="section=='classement'">
+    <p>classement</p>
+  </div>
+  <div *ngIf="section=='main'">
+    <p>main</p>
+  </div>
 </div>

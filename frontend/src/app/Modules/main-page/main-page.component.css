@@ -9,10 +9,22 @@ header{
   width: 100%;
   background-color: #2B2D42;
   height: 60px;
+  justify-content: space-between;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+header .btn-container{
+  display: flex;
+  width: 40%;
+  align-items: center;
+  justify-content: space-between;
+
 }
 
 logo-wiki-hoax{
   height: 100%;
   aspect-ratio: 3.4;
   display: block;
+  cursor: pointer;
 }
