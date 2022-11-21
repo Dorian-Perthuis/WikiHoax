@@ -1,15 +1,16 @@
 package com.IA.Promo171.WikiHoax.backend;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.stereotype.Component;
+import java.util.Scanner;
 
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-
 
 public class WikiScrapper {
 
@@ -21,43 +22,99 @@ public class WikiScrapper {
             client.getOptions().setCssEnabled(false);
             client.getOptions().setJavaScriptEnabled(false);
 
-            String url="https://fr.wikihow.com/arrêter-de-baver-pendant-son-sommeil";
+            File links =new File("backend//src//main//resources//links.txt");
+            Scanner scanner =new Scanner(links);
 
-            final HtmlPage page = client.getPage(url);
+            String url;
 
-            String title= ((HtmlAnchor) page.getFirstByXPath("//h1[@class='title_md']//a")).getTextContent();
+            ArrayList<Page> pages=new ArrayList<>();
+            ArrayList<Image> images=new ArrayList<>();
 
-            System.out.println(title);
+            long page_id=1;
+            long image_id=1;
 
-            String desc=page.getElementById("mf-section-0").asNormalizedText();
-            System.out.println(desc);
-    
-    
+            while (scanner.hasNextLine()) {
+                url = scanner.nextLine();
 
-            Page wikiPage=pageDao.newPage(new Page(title,desc));
+                System.out.println(url);
 
-            Long id=wikiPage.getId();
+                final HtmlPage page = client.getPage(url);
 
-            ArrayList<String> imgUrls=new ArrayList<>();
+                String title = ((HtmlAnchor) page.getFirstByXPath("//h1//a")).getTextContent();
 
-            List<HtmlImage> imgs=page.getByXPath("//div//div[@class='section_text']//ol[@class='steps_list_2']//li//div[@class='mwimg  largeimage  floatcenter ']//a[@class='image']//div[@class='content-spacer']//img");
+                System.out.println(title);
 
+                String desc = page.getElementById("mf-section-0").asNormalizedText();
+                System.out.println(desc);
 
-            for(HtmlImage img : imgs){
-                String imgUrl=img.getAttribute("data-src");
+                Page wikiPage=new Page(page_id,title,desc);
 
-                imgUrls.add(imgUrl);
+                ArrayList<String> imgUrls = new ArrayList<>();
 
-                Image im= new Image(imgUrl,wikiPage);
+                List<HtmlImage> imgs = page.getByXPath(
+                        "//div//div[@class='section_text']//ol[@class='steps_list_2']//li//div[@class='mwimg  largeimage  floatcenter ']//a[@class='image']//div[@class='content-spacer']//img");
 
-                wikiPage.addImage(im);
+                for (HtmlImage img : imgs) {
+                    String imgUrl = img.getAttribute("data-src");
+
+                    Image image= new Image(image_id,imgUrl,wikiPage);
+
+                    images.add(image);
+
+                    image_id++;
+                }
+                pages.add(wikiPage);
+
+                page_id++;
             }
+            scanner.close();
+
+            SQLFile(pages,images);
 
 
-          }
-          catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-          }
+        }
     }
-    
+
+    public static void SQLFile(ArrayList<Page> pages, ArrayList<Image> images){
+        File data=new File("backend//src//main//resources//data.sql");
+        try {
+            data.createNewFile();
+            FileWriter writer=new FileWriter(data);
+            writer.write("INSERT INTO page(id,description,titre) VALUES\n");
+
+            for(int i=0;i<pages.size();i++){
+                Page page = pages.get(i);
+                writer.write("("+page.getId().toString()+",\""+page.getDescription()+"\",\""+page.getTitre()+"\")");
+
+                if(i<pages.size()-1){
+                    writer.write(",\n");
+                }
+            }
+            writer.write(";\n\n");
+
+            writer.write("INSERT INTO image(id,url,page_fk) VALUES\n");
+
+            for (int i=0;i<images.size();i++){
+                Image image=images.get(i);
+                writer.write("("+image.getId().toString()+",\""+image.getUrl()+"\","+image.getPage().getId().toString()+")");
+
+                if(i<images.size()-1){
+                    writer.write(",\n");
+                }
+            }
+            writer.write(";\n\n");
+
+            writer.close();
+
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+
+    }
+
 }
