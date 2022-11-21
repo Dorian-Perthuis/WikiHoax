@@ -38,3 +38,4 @@ build/
 ### Spring ###
 application.properties
 
+/node_modules/
