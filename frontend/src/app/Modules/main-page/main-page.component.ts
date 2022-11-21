@@ -27,4 +27,8 @@ export class MainPageComponent implements OnInit {
     this.section = 'main';
   }
 
+  activateUser(){
+    this.section = 'user';
+  }
+
 }

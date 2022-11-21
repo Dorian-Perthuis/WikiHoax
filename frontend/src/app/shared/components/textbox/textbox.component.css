@@ -26,3 +26,16 @@
   box-sizing: border-box;
   outline: none;
 }
+
+.light .title{
+  color:#2B2D42;
+}
+
+.light .line{
+  background-color: #EF233C;
+}
+
+.light .inputBox{
+  border: 2px solid #2B2D42;
+}
+

@@ -8,6 +8,8 @@ import { TextboxComponent } from './shared/components/textbox/textbox.component'
 import { MainPageComponent } from './Modules/main-page/main-page.component';
 import { HeaderButtonComponent } from './Modules/main-page/header-button/header-button.component';
 import { UserButtonComponent } from './Modules/main-page/user-button/user-button.component';
+import { GamePageComponent } from './Modules/game-page/game-page.component';
+import { CarrouselComponent } from './shared/components/carrousel/carrousel.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { UserButtonComponent } from './Modules/main-page/user-button/user-button
     TextboxComponent,
     MainPageComponent,
     HeaderButtonComponent,
-    UserButtonComponent
+    UserButtonComponent,
+    GamePageComponent,
+    CarrouselComponent
   ],
   imports: [
     BrowserModule
