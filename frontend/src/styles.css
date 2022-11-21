@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Kadwa&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Kadwa', 'Times New Roman', Times, serif;
+
+}
+
+
+/*Reset css button*/
+button{
+  all: unset;
+}
+
+/*button Style*/
+
+.button-red-1{
+  font-size: 1rem;
+  background-color: #EF233C;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color:#EDF2F4;
+  font-size: bold;
+  padding: 0.3rem 1.5rem;
+  cursor: pointer;
+}
+
+.button-red-3{
+  font-size: 0.8rem;
+  background-color: transparent;
+  text-decoration: underline;
+  color:#EF233C;
+  cursor: pointer;
+}
+
+.test{
+  background-color: red;
+}

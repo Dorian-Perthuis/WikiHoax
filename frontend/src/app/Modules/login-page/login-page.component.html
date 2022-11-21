@@ -1,0 +1,28 @@
+<div class="page">
+  <div class="menu">
+    <logo-wiki-hoax class="add-padding"></logo-wiki-hoax>
+
+    <div class="container" *ngIf="!loginBool"> <!--Si false alors création de compte-->
+      <div class="input-container">
+        <textbox title="Nom d'utilisateur"></textbox>
+        <textbox title="Mot de passe"></textbox>
+        <textbox title="Confirmer"></textbox>
+      </div>
+      <div class="button-container">
+        <button class="button-red-1">Créer !</button>
+        <button class="button-red-3" (click)="toggleLoginBool()">Déjà un compte ?</button>
+      </div>
+    </div>
+
+    <div class="container" *ngIf="loginBool"> <!--Si true alors connexion-->
+      <div class="input-container">
+        <textbox title="Nom d'utilisateur"></textbox>
+        <textbox title="Mot de passe"></textbox>
+      </div>
+      <div class="button-container">
+        <button class="button-red-1">Connexion</button>
+        <button class="button-red-3" (click)="toggleLoginBool()">Pas encore de comptes ?</button>
+      </div>
+    </div>
+  </div>
+</div>

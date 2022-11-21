@@ -1,0 +1,18 @@
+.page{
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+header{
+  display: flex;
+  width: 100%;
+  background-color: #2B2D42;
+  height: 60px;
+}
+
+logo-wiki-hoax{
+  height: 100%;
+  aspect-ratio: 3.4;
+  display: block;
+}

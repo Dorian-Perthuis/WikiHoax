@@ -1,0 +1,28 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 250px;
+}
+
+.title{
+  font-weight: bold;
+  color: #EDF2F4;
+  height: 1.5rem;
+}
+
+.line{
+  width: 100%;
+  height: 2px;
+  background-color: #8D99AE;
+}
+
+.inputBox{
+  background-color: #EDF2F4;
+  border-radius: 10px;
+  width: 100%;
+  color: #2B2D42;
+  padding: 0.2rem 0.5rem;
+  box-sizing: border-box;
+  outline: none;
+}

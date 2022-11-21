@@ -1,0 +1,10 @@
+
+<div>
+  <div *ngIf="!connected"> <!--Utilisateur pas connecté-->
+    <login-page></login-page>
+  </div>
+
+  <div *ngIf="connected"> <!--Utilisateur connecté-->
+    <main-page></main-page>
+  </div>
+</div>

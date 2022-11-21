@@ -1,0 +1,26 @@
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  gap:5px;
+  width: fit-content;
+}
+
+.icon{
+  height: 60%;
+  aspect-ratio: 1;
+  background-color: #EDF2F4;
+  border-radius: 50px;
+}
+
+.title{
+  color:#EDF2F4;
+}
+
+.line{
+  height: 2px;
+  width: 100%;
+  background-color: #8D99AE;
+  transform: translateY(-6px);
+}
