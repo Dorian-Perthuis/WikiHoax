@@ -7,9 +7,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageComponent implements OnInit {
 
+  section : string = "main";
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+  activateClassement(){
+    this.section = 'classement';
+  }
+
+  activatePartie(){
+    this.section = 'partie';
+  }
+
+  activateMain(){
+    this.section = 'main';
   }
 
 }

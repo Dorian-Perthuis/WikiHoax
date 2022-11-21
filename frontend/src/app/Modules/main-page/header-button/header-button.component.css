@@ -5,13 +5,20 @@
   height: 50px;
   gap:5px;
   width: fit-content;
+  cursor: pointer;
 }
 
 .icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 60%;
   aspect-ratio: 1;
-  background-color: #EDF2F4;
-  border-radius: 50px;
+}
+
+.icon svg{
+  width: auto;
+  height: auto;
 }
 
 .title{
