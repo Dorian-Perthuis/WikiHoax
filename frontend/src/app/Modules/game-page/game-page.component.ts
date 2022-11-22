@@ -44,6 +44,16 @@ export class GamePageComponent implements OnInit, AfterViewInit {
   }
 
   splitText(text : string, array:item[]){
+    for(var i = 0; i<text.length; i++){
+      if(text[i] === "." || text[i] === ","){
+        text = [text.slice(0,i), ' ', text.slice(i)].join('');
+        i +=1;
+      }else if(text[i] === "'"){
+        text = [text.slice(0,i), ' ', text.slice(i,i+1), ' ', text.slice(i+1)].join('');
+        i+=2;
+      }
+    }
+
     text.split(" ").forEach((e:string, index) => {
       array.push({
         id:index,
@@ -58,6 +68,14 @@ export class GamePageComponent implements OnInit, AfterViewInit {
     htmlElement.nativeElement.childNodes.forEach((htmlElement: ElementRef, index:number) => {
       if(typeof items[index] != "undefined"){
         this.renderer.setStyle(htmlElement,'width',`${10*items[index].lenght+5}px`);
+        if (items[index].text === '.' ||items[index].text === ',' || items[index].text ==="'"){
+
+          items[index].find = true;
+          this.renderer.setProperty(htmlElement, 'textContent', items[index].text);
+          this.renderer.setStyle(htmlElement, 'width', 'initial');
+          this.renderer.addClass(htmlElement, 'show');
+          this.renderer.removeClass(htmlElement, "hide");
+        }
       }
     });
   }
@@ -88,7 +106,6 @@ export class GamePageComponent implements OnInit, AfterViewInit {
   }
 
   testWin(){
-    console.log(this.titleItems.every((e)=>e.find===true));
     if(this.titleItems.every((e)=>e.find===true)){
       this.mainItems.forEach((e, index) => {
         this.renderer.setProperty(this.textElement.nativeElement.childNodes[index], 'textContent', e.text);
