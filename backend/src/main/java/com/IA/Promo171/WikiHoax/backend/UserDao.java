@@ -1,4 +1,4 @@
-package com.IA.Promo171.WikiHoax;
+package com.IA.Promo171.WikiHoax.backend;
 
 import java.util.List;
 
@@ -8,8 +8,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.IA.Promo171.WikiHoax.backend.User;
 
 @Repository
 @Transactional
