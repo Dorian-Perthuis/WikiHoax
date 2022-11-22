@@ -1,4 +1,4 @@
-package com.IA.Promo171.WikiHoax.backend;
+package com.IA.Promo171.WikiHoax.backend.User;
 
 import java.util.List;
 
@@ -9,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.IA.Promo171.WikiHoax.backend.Page.Page;
-import com.IA.Promo171.WikiHoax.backend.User.User;
-
 @Repository
 @Transactional
-public class WikiHoaxDao {
+public class UserDao {
 
 @Autowired
 private SessionFactory sessionFactory;
@@ -31,16 +28,18 @@ public User newUser(User newUser) {
   return newUser;
 }
 
-public List<Page> listElement() {
+public User getUser(Long id) {
   Session session = this.sessionFactory.getCurrentSession();
-  Query<Page> query = session.createQuery("From Page", Page.class);
-  return query.getResultList();
+        Query<User> query = session.createQuery("From User user where user.id = :id", User.class).setParameter("id",
+                id);
+        return query.getSingleResult();
 }
 
-public Page newElement(Page newElement) {
+public String getUserMdp(String identifiant){
   Session session = this.sessionFactory.getCurrentSession();
-  session.save(newElement);
-  return newElement;
+        Query<String> query = session.createQuery("SELECT mdp From User user where user.identifiant = :identifiant", String.class).setParameter("identifiant",
+        identifiant);
+        return query.getSingleResult();
 }
 
 }
