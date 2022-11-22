@@ -7,7 +7,12 @@
 }
 
 .sideBar{
-  width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  box-sizing: border-box;
+  flex-basis: 250px;
   background-color: #EDF2F4;
   box-shadow: 7px 0px 15px rgba(0,0,0,0.25);
 }
@@ -15,6 +20,7 @@
 .content-container{
   display: flex;
   flex-direction: column;
+  flex-basis: fit-content;
   padding: 25px 45px;
   box-sizing: border-box;
   gap:50px;
@@ -29,12 +35,49 @@
 
 .title{
   font-size: 1.3rem;
+  display: flex;
+  flex-wrap: wrap;
   font-weight: bold;
   color : #D90429;
   margin-bottom: 15px;
 }
 
+.title span{
+  height: 2rem;
+}
+
 .text{
+  display: flex;
+  flex-wrap: wrap;
   color:#2B2D42;
   width: 100%;
 }
+
+span{
+  margin: 7px 3px;
+}
+
+span.hide{
+  background-color: #2B2D42;
+  color: #2B2D42;
+  border-radius: 3px;
+  text-align: center;
+  height: 1.5rem;
+  transition: color 150ms ease-in;
+}
+
+span.hide:hover{
+  color: #EDF2F4;
+
+}
+
+.span.show{
+  width: initial;
+  color: inherit;
+  background-color: blue;
+}
+
+span.show:hover{
+  color:inherit;
+}
+

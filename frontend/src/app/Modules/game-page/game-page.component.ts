@@ -1,15 +1,100 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, createPlatform, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'game-page',
   templateUrl: './game-page.component.html',
   styleUrls: ['./game-page.component.css']
 })
-export class GamePageComponent implements OnInit {
+export class GamePageComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  @ViewChild('titleId') titleElement! : ElementRef;
+  @ViewChild('textId') textElement! : ElementRef;
+
+  titleSplit : string[] = [];
+  textSplit : string[] = [];
+
+  titleText : string = "Comment écrire une histoire d'amour.";
+  mainText : string = "La partie la plus excitante dans le fait de tomber amoureux est souvent le début d'une romance, la rencontre fortuite et parfois amusante avec l'être aimé, l'insouciance et la joie qu'accompagnent la réalisation que cette attirance est mutuelle, le confort et la sécurité de pouvoir se reposer sur une autre personne et construire une vie à deux, etc. Gardez tous ces aspects en tête lorsque vous commencerez à écrire votre histoire d'amour. Car le plus important, au-delà de vos personnages, intrigues et style d'écriture, sera de captiver votre lecteur et de le rendre aussi impatient que vos héros à l'idée de cet amour naissant."
+  titleItems: item[] = [];
+  mainItems: item[] = [];
+
+  mot : string = "";
+
+  testedWords : string[] = [];
+
+  constructor(
+    private renderer : Renderer2
+  ) { }
+
 
   ngOnInit(): void {
+    this.splitText(this.titleText,this.titleItems);
+    this.splitText(this.mainText, this.mainItems);
   }
 
+  ngAfterViewInit(): void {
+    this.updateStyle(this.titleElement, this.titleItems);
+    this.updateStyle(this.textElement, this.mainItems);
+  }
+
+  splitText(text : string, array:item[]){
+    text.split(" ").forEach((e:string, index) => {
+      array.push({
+        id:index,
+        text:e,
+        lenght:e.length,
+        find: false
+      });
+    });
+  }
+
+  updateStyle(htmlElement : ElementRef, items:item[]){
+    htmlElement.nativeElement.childNodes.forEach((htmlElement: ElementRef, index:number) => {
+      if(typeof items[index] != "undefined"){
+        this.renderer.setStyle(htmlElement,'width',`${10*items[index].lenght+5}px`);
+      }
+    });
+  }
+
+  updateInput(mot : string){
+    this.mot = mot.trim();
+  }
+
+  testMot(){
+    this.findMot(this.mot, this.mainItems, this.textElement.nativeElement.childNodes);
+    this.findMot(this.mot, this.titleItems, this.titleElement.nativeElement.childNodes, true);
+    this.testWin();
+    this.testedWords.push(this.mot);
+  }
+
+  findMot(mot : string, array:item[], htmlElements:ElementRef[], hasNbFind:boolean = false){
+    array.forEach((e, index)=>{
+      if((!e.find) && (e.text.toLocaleLowerCase() == mot.toLocaleLowerCase())){
+        e.find = true;
+        this.renderer.setProperty(htmlElements[index], 'textContent', e.text);
+        this.renderer.setStyle(htmlElements[index], 'width', 'initial');
+        this.renderer.addClass(htmlElements[index], 'show');
+        this.renderer.removeClass(htmlElements[index], "hide");
+      }
+    });
+  }
+
+  testWin(){
+    console.log(this.titleItems.every((e)=>e.find===true));
+    if(this.titleItems.every((e)=>e.find===true)){
+      this.mainItems.forEach((e, index) => {
+        this.renderer.setProperty(this.textElement.nativeElement.childNodes[index], 'textContent', e.text);
+        this.renderer.setStyle(this.textElement.nativeElement.childNodes[index], 'width', 'initial');
+        this.renderer.addClass(this.textElement.nativeElement.childNodes[index], 'show');
+        this.renderer.removeClass(this.textElement.nativeElement.childNodes[index], "hide");
+      });
+    }
+  }
+}
+
+export interface item{
+  id: number;
+  text: string;
+  lenght: number;
+  find: boolean;
 }

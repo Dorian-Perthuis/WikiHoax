@@ -10,6 +10,11 @@ import { HeaderButtonComponent } from './Modules/main-page/header-button/header-
 import { UserButtonComponent } from './Modules/main-page/user-button/user-button.component';
 import { GamePageComponent } from './Modules/game-page/game-page.component';
 import { CarrouselComponent } from './shared/components/carrousel/carrousel.component';
+import { TutoPageComponent } from './Modules/tuto-page/tuto-page.component';
+import { RankPageComponent } from './Modules/rank-page/rank-page.component';
+import { UserPageComponent } from './Modules/user-page/user-page.component';
+import { RankTableComponent } from './Modules/rank-page/rank-table/rank-table.component';
+import { DynamicWidthDirective } from './Modules/game-page/Directives/dynamic-width.directive';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,12 @@ import { CarrouselComponent } from './shared/components/carrousel/carrousel.comp
     HeaderButtonComponent,
     UserButtonComponent,
     GamePageComponent,
-    CarrouselComponent
+    CarrouselComponent,
+    TutoPageComponent,
+    RankPageComponent,
+    UserPageComponent,
+    RankTableComponent,
+    DynamicWidthDirective
   ],
   imports: [
     BrowserModule

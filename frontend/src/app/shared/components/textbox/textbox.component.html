@@ -1,5 +1,5 @@
-<div #contentContainer class="container" [ngClass]="{'light':color=='light'}">
+<div #contentContainer class="container" (ngClass)="color">
   <span class="title">{{title}}</span>
   <div class="line"></div>
-  <div class="inputBox" contenteditable="true"></div>
+  <div #editable class="inputBox" contenteditable="true" (keydown.enter)="$event.preventDefault();deleteInput();" (keyup)="inputValue(editable.innerText)"></div>
 </div>

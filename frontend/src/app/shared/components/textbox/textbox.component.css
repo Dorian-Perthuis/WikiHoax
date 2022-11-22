@@ -18,6 +18,7 @@
 }
 
 .inputBox{
+  display: inline-block;
   background-color: #EDF2F4;
   border-radius: 10px;
   width: 100%;

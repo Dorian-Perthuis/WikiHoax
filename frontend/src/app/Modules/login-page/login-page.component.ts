@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'login-page',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
+  @Output() connectionEvent: EventEmitter<boolean> = new EventEmitter();
+  @Output() createAccountEvent: EventEmitter<boolean> = new EventEmitter();
 
   loginBool : boolean = true;
 
@@ -18,4 +20,11 @@ export class LoginPageComponent implements OnInit {
     this.loginBool = !this.loginBool;
   }
 
+  connection() : void{
+    this.connectionEvent.emit(true);
+  }
+
+  createAccount(){
+    this.createAccountEvent.emit(true);
+  }
 }

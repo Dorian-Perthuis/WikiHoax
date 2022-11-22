@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'textbox',
@@ -9,10 +9,13 @@ export class TextboxComponent implements OnInit, AfterViewInit {
 
   @Input() title: string = "Need Title !";
   @Input() color: string = "";
+  @ViewChild('editable') input! : ElementRef;
+
+  @Output() inputEvent = new EventEmitter<string>();
   @ViewChild('contentContainer') container!: ElementRef;
 
   constructor(
-    private renderer : Renderer2
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
@@ -20,9 +23,15 @@ export class TextboxComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if(this.color =='light'){
-      this.renderer.setStyle(this.container,"light",true)
-    }
+    this.renderer.addClass(this.container.nativeElement, this.color);
+  }
+
+  inputValue(text : string) {
+    this.inputEvent.emit(text);
+  }
+
+  deleteInput(){
+    this.renderer.setProperty(this.input.nativeElement,'innerText', "");
   }
 
 }

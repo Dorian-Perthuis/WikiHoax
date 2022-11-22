@@ -9,7 +9,7 @@
         <textbox title="Confirmer"></textbox>
       </div>
       <div class="button-container">
-        <button class="button-red-1">Créer !</button>
+        <button class="button-red-1" (click)="createAccount()">Créer !</button>
         <button class="button-red-3" (click)="toggleLoginBool()">Déjà un compte ?</button>
       </div>
     </div>
@@ -20,7 +20,7 @@
         <textbox title="Mot de passe"></textbox>
       </div>
       <div class="button-container">
-        <button class="button-red-1">Connexion</button>
+        <button class="button-red-1" (click)="connection()">Connexion</button>
         <button class="button-red-3" (click)="toggleLoginBool()">Pas encore de comptes ?</button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 
 <div>
   <div *ngIf="!connected"> <!--Utilisateur pas connecté-->
-    <login-page></login-page>
+    <login-page (connectionEvent)="connected=true" (createAccountEvent)="connected=true"></login-page>
   </div>
 
   <div *ngIf="connected"> <!--Utilisateur connecté-->
