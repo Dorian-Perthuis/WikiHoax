@@ -25,7 +25,7 @@ export class GamePageComponent implements OnInit, AfterViewInit {
 
   constructor(
     private renderer : Renderer2,
-    private gameService : GameService
+    //private gameService : GameService
   ) { }
 
 
