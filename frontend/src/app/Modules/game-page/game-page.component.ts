@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, createPlatform, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { gamePage, GameService } from 'src/app/Services/game.service';
 
 @Component({
   selector: 'game-page',
@@ -23,13 +24,18 @@ export class GamePageComponent implements OnInit, AfterViewInit {
   testedWords : string[] = [];
 
   constructor(
-    private renderer : Renderer2
+    private renderer : Renderer2,
+    private gameService : GameService
   ) { }
 
 
   ngOnInit(): void {
     this.splitText(this.titleText,this.titleItems);
     this.splitText(this.mainText, this.mainItems);
+    //this.gameService.getGamePage().subscribe((json:gamePage) => {
+    //  this.titleText = json.title;
+    //  this.mainText = json.text;
+    //});
   }
 
   ngAfterViewInit(): void {
@@ -64,7 +70,9 @@ export class GamePageComponent implements OnInit, AfterViewInit {
     this.findMot(this.mot, this.mainItems, this.textElement.nativeElement.childNodes);
     this.findMot(this.mot, this.titleItems, this.titleElement.nativeElement.childNodes, true);
     this.testWin();
-    this.testedWords.push(this.mot);
+    if(!this.testedWords.includes(this.mot)){
+      this.testedWords.push(this.mot);
+    }
   }
 
   findMot(mot : string, array:item[], htmlElements:ElementRef[], hasNbFind:boolean = false){
