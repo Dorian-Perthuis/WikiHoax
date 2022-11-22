@@ -26,4 +26,38 @@ public class Image {
         this.url = url;
     }
 
+
+    public Image(Long id, String url, Page page) {
+        this.id = id;
+        this.url = url;
+        this.page = page;
+    }
+
+
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Page getPage() {
+        return this.page;
+    }
+
+    public void setPage(Page page) {
+        this.page = page;
+    }
+
+
 }
