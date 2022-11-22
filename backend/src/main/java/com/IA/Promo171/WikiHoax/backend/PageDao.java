@@ -1,5 +1,6 @@
 package com.IA.Promo171.WikiHoax.backend;
 
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -16,8 +17,7 @@ public class PageDao {
 
     public Page getPage(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Query<Page> query = session.createQuery("From Page personne where page.id = :id", Page.class).setParameter("id",
-                id);
+        Query<Page> query = session.createQuery("From Page where id =: page_id", Page.class).setParameter("page_id",id);
         return query.getSingleResult();
     }
 
@@ -36,4 +36,5 @@ public class PageDao {
         session.save(newImage);
         return newImage;
     }
+
 }

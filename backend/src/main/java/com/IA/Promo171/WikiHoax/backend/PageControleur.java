@@ -1,6 +1,7 @@
 package com.IA.Promo171.WikiHoax.backend;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 @RestController
 public class PageControleur {
@@ -40,4 +45,15 @@ public class PageControleur {
         return lesImages.stream().map(img -> {return img;}).collect(Collectors.joining(",", "[", "]")); 
 
     } */
+
+    @RequestMapping(value = "/get-todays-page",method = RequestMethod.GET)
+    public Page getTodaysPage(){
+        Random rd = new Random();
+        Long i=rd.nextLong(21)+1;
+
+        Page page=pageDao.getPage(i);
+
+        return page;
+
+    }
 }

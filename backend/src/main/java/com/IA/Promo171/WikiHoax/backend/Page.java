@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Page {
 
@@ -26,7 +28,13 @@ public class Page {
     private String description;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy="page", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Image> img = new ArrayList();
+
+
+    public Page() {
+    }
+
 
     public Page(long id) {
         this.id = id;

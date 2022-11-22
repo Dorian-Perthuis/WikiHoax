@@ -34,6 +34,11 @@ public class Image {
     }
 
 
+    public Image() {
+    }
+
+
+
 
     public Long getId() {
         return this.id;
