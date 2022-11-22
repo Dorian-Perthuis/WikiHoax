@@ -28,4 +28,14 @@ public User(Long id, String identifiant, String mdp) {
     this.mdp = mdp;
 }
 
+public String getIdentifiant() {
+    return identifiant;
+}
+
+public String getMdp() {
+    return mdp;
+}
+
+
+
 }
