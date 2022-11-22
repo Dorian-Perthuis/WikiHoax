@@ -28,9 +28,8 @@
   margin-right: 30px;
 }
 
-.test-image{
+.image{
   display: inline-block;
-  background-color: red;
   height: 200px;
   width: 250px;
   flex-grow: 0;

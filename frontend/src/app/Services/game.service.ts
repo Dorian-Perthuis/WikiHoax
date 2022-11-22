@@ -10,7 +10,7 @@ export class GameService {
   constructor(private http: HttpClient) { }
 
   getGamePage(): Observable<gamePage> {
-    return this.http.get<gamePage>("localhost:4200/")
+    return this.http.get<gamePage>("localhost:4200/get-todays-page")
       .pipe(catchError(this.handleError));
   }
 
@@ -25,6 +25,13 @@ export class GameService {
 }
 
 export interface gamePage{
-  title : string;
-  text : string;
+  id: number,
+  title : string,
+  description : string,
+  images : image[],
+}
+
+export interface image{
+  id:number,
+  url: number
 }

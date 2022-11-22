@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { gamePage, GameService } from 'src/app/Services/game.service';
+import { gamePage, GameService, image } from 'src/app/Services/game.service';
 
 @Component({
   selector: 'game-page',
@@ -19,23 +19,26 @@ export class GamePageComponent implements OnInit, AfterViewInit {
   titleItems: item[] = [];
   mainItems: item[] = [];
 
+  images: image[] = [];
+
   mot : string = "";
 
   testedWords : string[] = [];
 
   constructor(
     private renderer : Renderer2,
-    //private gameService : GameService
+    private gameService : GameService
   ) { }
 
 
   ngOnInit(): void {
     this.splitText(this.titleText,this.titleItems);
     this.splitText(this.mainText, this.mainItems);
-    //this.gameService.getGamePage().subscribe((json:gamePage) => {
-    //  this.titleText = json.title;
-    //  this.mainText = json.text;
-    //});
+    this.gameService.getGamePage().subscribe((json:gamePage) => {
+      this.titleText = json.title;
+      this.mainText = json.description;
+      this.images = json.images;
+    });
   }
 
   ngAfterViewInit(): void {

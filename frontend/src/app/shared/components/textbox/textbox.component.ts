@@ -1,11 +1,11 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'textbox',
   templateUrl: './textbox.component.html',
   styleUrls: ['./textbox.component.css']
 })
-export class TextboxComponent implements OnInit, AfterViewInit {
+export class TextboxComponent implements OnInit, AfterViewChecked {
 
   @Input() title: string = "Need Title !";
   @Input() color: string = "";
@@ -22,7 +22,7 @@ export class TextboxComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewChecked(): void {
     this.renderer.addClass(this.container.nativeElement, this.color);
   }
 

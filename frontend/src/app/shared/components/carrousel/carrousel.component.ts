@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import { image } from 'src/app/Services/game.service';
 
 @Component({
   selector: 'carrousel',
@@ -7,13 +8,16 @@ import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, TemplateRef, V
 })
 export class CarrouselComponent implements OnInit {
 
-  constructor(private renderer: Renderer2) { }
-
   @ViewChild('images') images! : ElementRef;
   @ViewChild('btnG') btnG! : ElementRef;
   @ViewChild('btnR') btnR! : ElementRef;
+
+  @Input() imageList : image[] = [];
+
   nbItems : number = 5;
   image_size : number = 200 ;
+
+  constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {
   }

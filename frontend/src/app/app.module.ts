@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoginPageComponent } from './Modules/login-page/login-page.component';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './Modules/root/app.component';
 import { LogoWikiHoaxComponent } from './shared/components/logo-wiki-hoax/logo-wiki-hoax.component';
 import { TextboxComponent } from './shared/components/textbox/textbox.component';
@@ -34,9 +34,11 @@ import { DynamicWidthDirective } from './Modules/game-page/Directives/dynamic-wi
     DynamicWidthDirective
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
