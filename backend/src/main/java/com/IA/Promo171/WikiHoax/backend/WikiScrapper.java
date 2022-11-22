@@ -1,8 +1,12 @@
 package com.IA.Promo171.WikiHoax.backend;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -44,7 +48,7 @@ public class WikiScrapper {
 
                 System.out.println(title);
 
-                String desc = page.getElementById("mf-section-0").asNormalizedText();
+                String desc = page.getElementById("mf-section-0").getTextContent().replaceAll("\n","");
                 System.out.println(desc);
 
                 Page wikiPage=new Page(page_id,title,desc);
@@ -81,11 +85,16 @@ public class WikiScrapper {
         File data=new File("backend//src//main//resources//data.sql");
         try {
             data.createNewFile();
-            FileWriter writer=new FileWriter(data);
+            FileOutputStream fstream=new FileOutputStream(data);
+            OutputStreamWriter osw=new OutputStreamWriter(fstream,StandardCharsets.UTF_8);
+            BufferedWriter writer=new BufferedWriter(osw);
+
             writer.write("INSERT INTO page(id,description,titre) VALUES\n");
 
             for(int i=0;i<pages.size();i++){
                 Page page = pages.get(i);
+                System.out.println(page.getTitre());
+                System.out.println(page.getDescription());
                 writer.write("("+page.getId().toString()+",\""+page.getDescription()+"\",\""+page.getTitre()+"\")");
 
                 if(i<pages.size()-1){
