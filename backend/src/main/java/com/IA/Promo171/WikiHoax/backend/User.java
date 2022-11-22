@@ -15,14 +15,16 @@ private String nom;
 private String prenom;
 private String email;
 private String fonction;
+private String identifiant;
 private String mdp;
 
-public User(Long id, String nom, String prenom, String email, String fonction, String mdp) {
+public User(Long id) {
     this.id = id;
-    this.nom = nom;
-    this.prenom = prenom;
-    this.email = email;
-    this.fonction = fonction;
+}
+
+public User(Long id, String identifiant, String mdp) {
+    this.id = id;
+    this.identifiant = identifiant;
     this.mdp = mdp;
 }
 
