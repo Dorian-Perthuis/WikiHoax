@@ -6,7 +6,7 @@
       </svg>
     </button>
     <div #images class="images" (scroll)="onScroll($event)">
-      <div *ngfor="let image of imageList">
+      <div *ngFor="let image of imageList">
         <img class="image" (src)="image.url">
       </div>
     </div>

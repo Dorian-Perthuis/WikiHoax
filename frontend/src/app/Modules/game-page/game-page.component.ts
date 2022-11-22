@@ -14,8 +14,11 @@ export class GamePageComponent implements OnInit, AfterViewInit {
   titleSplit : string[] = [];
   textSplit : string[] = [];
 
-  titleText : string = "Comment écrire une histoire d'amour.";
+  /*titleText : string = "Comment écrire une histoire d'amour.";
   mainText : string = "La partie la plus excitante dans le fait de tomber amoureux est souvent le début d'une romance, la rencontre fortuite et parfois amusante avec l'être aimé, l'insouciance et la joie qu'accompagnent la réalisation que cette attirance est mutuelle, le confort et la sécurité de pouvoir se reposer sur une autre personne et construire une vie à deux, etc. Gardez tous ces aspects en tête lorsque vous commencerez à écrire votre histoire d'amour. Car le plus important, au-delà de vos personnages, intrigues et style d'écriture, sera de captiver votre lecteur et de le rendre aussi impatient que vos héros à l'idée de cet amour naissant."
+  */
+  titleText : string = "";
+  mainText : string = "";
   titleItems: item[] = [];
   mainItems: item[] = [];
 
@@ -32,18 +35,20 @@ export class GamePageComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    this.splitText(this.titleText,this.titleItems);
-    this.splitText(this.mainText, this.mainItems);
+    
     this.gameService.getGamePage().subscribe((json:gamePage) => {
-      this.titleText = json.title;
+      this.titleText = json.titre;
       this.mainText = json.description;
       this.images = json.images;
+      this.splitText(this.titleText,this.titleItems);
+      this.splitText(this.mainText, this.mainItems);
+      this.updateStyle(this.titleElement, this.titleItems);
+      this.updateStyle(this.textElement, this.mainItems);
     });
   }
 
   ngAfterViewInit(): void {
-    this.updateStyle(this.titleElement, this.titleItems);
-    this.updateStyle(this.textElement, this.mainItems);
+    
   }
 
   splitText(text : string, array:item[]){
