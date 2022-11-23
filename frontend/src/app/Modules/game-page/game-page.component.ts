@@ -40,19 +40,17 @@ export class GamePageComponent implements OnInit,AfterViewInit {
 
 
   ngOnInit(): void {
-    this.splitText(this.titleText,this.titleItems);
-    this.splitText(this.mainText, this.mainItems);
+    
     this.gameService.getGamePage().subscribe((json:gamePage) => {
       this.titleText = json.titre;
       this.mainText = json.description;
       this.images = json.images;
-      this.reloadData(this.mainItems);
-      this.reloadData(this.titleItems);
+      this.splitText(this.titleText,this.titleItems);
+      this.splitText(this.mainText, this.mainItems);
       this.updateStyle(this.titleElement, this.titleItems);
       this.updateStyle(this.textElement, this.mainItems);
     });
   }
-
 
   splitText(text : string, array:item[]){
     for(var i = 0; i<text.length; i++){
@@ -129,10 +127,9 @@ export class GamePageComponent implements OnInit,AfterViewInit {
       });
     }
   }
-  reloadData(Array : Object[]){
-    Array=[...Array];
-  }
 }
+
+
 
 export interface item{
   id: number;
