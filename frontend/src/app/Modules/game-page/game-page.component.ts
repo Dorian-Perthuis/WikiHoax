@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { gamePage, GameService, image } from 'src/app/Services/game.service';
 
@@ -16,11 +17,9 @@ export class GamePageComponent implements OnInit, AfterViewInit {
 
   show : boolean = true;
 
-  /*titleText : string = "Comment écrire une histoire d'amour.";
+  titleText : string = "Comment écrire une histoire d'amour.";
   mainText : string = "La partie la plus excitante dans le fait de tomber amoureux est souvent le début d'une romance, la rencontre fortuite et parfois amusante avec l'être aimé, l'insouciance et la joie qu'accompagnent la réalisation que cette attirance est mutuelle, le confort et la sécurité de pouvoir se reposer sur une autre personne et construire une vie à deux, etc. Gardez tous ces aspects en tête lorsque vous commencerez à écrire votre histoire d'amour. Car le plus important, au-delà de vos personnages, intrigues et style d'écriture, sera de captiver votre lecteur et de le rendre aussi impatient que vos héros à l'idée de cet amour naissant."
-  */
-  titleText : string = "";
-  mainText : string = "";
+
   titleItems: item[] = [];
   mainItems: item[] = [];
 
@@ -38,23 +37,25 @@ export class GamePageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.gameService.getGamePage().subscribe((json:gamePage) => {
-      this.titleText = json.titre;
-      this.mainText = json.description;
-      this.images = json.images;
-      this.splitText(this.titleText,this.titleItems);
-      this.splitText(this.mainText, this.mainItems);
-      this.reload();
-      this.updateStyle(this.titleElement, this.titleItems);
-      this.updateStyle(this.textElement, this.mainItems);
-    });
+    //this.gameService.getGamePage().subscribe((json:gamePage) => {
+    //  this.titleText = json.titre;
+    //  this.mainText = json.description;
+    //  this.images = json.images;
+    //  this.splitText(this.titleText,this.titleItems);
+    //  this.splitText(this.mainText, this.mainItems);
+    //  this.reload();
+
+    //});
   }
 
   ngAfterViewInit(): void {
-
+    this.splitText(this.titleText,this.titleItems, this.titleElement);
+    this.splitText(this.mainText, this.mainItems, this.textElement);
+    this.updateStyle(this.titleElement, this.titleItems);
+    this.updateStyle(this.textElement, this.mainItems);
   }
 
-  splitText(text : string, array:item[]){
+  splitText(text : string, array:item[], element : ElementRef){
     for(var i = 0; i<text.length; i++){
       if(text[i] === "." || text[i] === ","){
         text = [text.slice(0,i), ' ', text.slice(i)].join('');
@@ -66,6 +67,10 @@ export class GamePageComponent implements OnInit, AfterViewInit {
     }
 
     text.split(" ").forEach((e:string, index) => {
+      let object = this.renderer.createElement("span");
+      this.renderer.addClass(object,"hide");
+      this.renderer.appendChild(element.nativeElement,object);
+
       array.push({
         id:index,
         text:e,
