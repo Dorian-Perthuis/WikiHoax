@@ -15,7 +15,7 @@
       <div #textId class="text"><span class="hide" *ngFor="let item of mainItems">{{item.lenght}}</span></div>
     </div>
     <div class="carrousel-container">
-      <carrousel></carrousel>
+      <carrousel (imageList)="images"></carrousel>
     </div>
   </div>
 </div>

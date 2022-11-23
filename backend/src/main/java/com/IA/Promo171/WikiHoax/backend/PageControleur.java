@@ -49,7 +49,7 @@ public class PageControleur {
     @RequestMapping(value = "/get-todays-page",method = RequestMethod.GET)
     public Page getTodaysPage(){
         Random rd = new Random();
-        Long i=rd.nextLong(21)+1;
+        Long i=2L;
 
         Page page=pageDao.getPage(i);
 
