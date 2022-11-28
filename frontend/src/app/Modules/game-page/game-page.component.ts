@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { gamePage, GameService, image } from 'src/app/Services/game.service';
+import { CarrouselComponent } from 'src/app/shared/components/carrousel/carrousel.component';
 
 @Component({
   selector: 'game-page',
@@ -11,6 +12,7 @@ export class GamePageComponent implements OnInit, AfterViewInit {
 
   @ViewChild('titleId') titleElement! : ElementRef;
   @ViewChild('textId') textElement! : ElementRef;
+  @ViewChild(CarrouselComponent) carrousel! : CarrouselComponent;
 
   titleSplit : string[] = [];
   textSplit : string[] = [];
@@ -37,22 +39,19 @@ export class GamePageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    //this.gameService.getGamePage().subscribe((json:gamePage) => {
-    //  this.titleText = json.titre;
-    //  this.mainText = json.description;
-    //  this.images = json.images;
-    //  this.splitText(this.titleText,this.titleItems);
-    //  this.splitText(this.mainText, this.mainItems);
-    //  this.reload();
-
-    //});
   }
 
   ngAfterViewInit(): void {
-    this.splitText(this.titleText,this.titleItems, this.titleElement);
-    this.splitText(this.mainText, this.mainItems, this.textElement);
-    this.updateStyle(this.titleElement, this.titleItems);
-    this.updateStyle(this.textElement, this.mainItems);
+    this.gameService.getGamePage().subscribe((json:gamePage) => {
+      this.titleText = json.titre;
+      this.mainText = json.description;
+      this.images = json.images;
+      this.splitText(this.titleText,this.titleItems, this.titleElement);
+      this.splitText(this.mainText, this.mainItems, this.textElement);
+      this.updateStyle(this.titleElement, this.titleItems);
+      this.updateStyle(this.textElement, this.mainItems);
+      this.carrousel.loadImages(json.images);
+    });
   }
 
   splitText(text : string, array:item[], element : ElementRef){
@@ -69,6 +68,7 @@ export class GamePageComponent implements OnInit, AfterViewInit {
     text.split(" ").forEach((e:string, index) => {
       let object = this.renderer.createElement("span");
       this.renderer.addClass(object,"hide");
+      this.renderer.setProperty(object, 'textContent', e.length);
       this.renderer.appendChild(element.nativeElement,object);
 
       array.push({
